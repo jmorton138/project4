@@ -1,0 +1,77 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<!-- <input type="text" id="new_post" name="new_post">
+<button id="post-button">Post</button> -->
+
+<li id="profile_id" value="{{ profile }}" hidden> </li>
+<li id="user"  value="{{ request.user }}" hidden></li>
+<li id="user_id" value="{{ request.user.id }}" hidden></li>
+
+
+<div style="float: right; margin: 50px">
+    
+    Number of followers: <div id="follower_count">{{ follower_count }}</div>
+    <div> 
+     Number of people following: <div id="following_count">{{ following_count }}</div>
+    </div>
+    <button id ="follow">{{ follow_button }}</button>
+</div>
+<div class="author" style="margin: 20px; font-size: 50px;">
+    {{ followee }}
+</div>
+
+{% for post in page_obj %}
+<div style="display: block; margin: 20px; font-family: arial"> 
+    <div id="{{ post.id }}">
+    <div>
+        <div class="text">
+            {{ post.text }}
+        </div>
+        
+        {% if post.author == request.user %}
+        <button id="edit-{{post.id}}" class="edit" onclick="showEdit(this)">edit</button>
+        {% endif %}
+    </div> 
+    {% if user.is_authenticated %}    
+        {% if post in likelist %}
+        <button id="like-{{ post.id }}" class="like" onclick="like(this)">unlike</button>
+        {% else %}
+        <button id="like-{{ post.id }}" class="like" onclick="like(this)">like</button>
+        {% endif %}
+    {% endif %}
+    Likes: <div id="like-count-{{ post.id }}" style="display: inline">{{ post.likes }}</div> 
+</div>
+        <div>
+            {{ post.timestamp }}
+        </div>
+    </div>
+
+{% endfor %}
+
+
+<div class="pagination">
+    <span class="step-links">
+
+    {% if page_obj.has_previous %}
+    <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+    
+    {% if page_obj.has_next %}
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">next</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">last</a>
+    {% endif %}
+</span>
+
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'network/index.js' %}"></script>
+{% endblock %}
+
+<!--  -->

@@ -1,0 +1,50 @@
+button {
+   margin-top: 6px;
+   background-color: #006666;
+   border: none;
+   color: white;
+   padding: 5px 20px;
+   text-align: center;
+   text-decoration: none;
+   display: inline;
+   font-size: 16px;
+   border-radius: 7px;
+
+}
+
+.text {
+   padding-left: 5px;
+   padding-top: 5px;
+   padding-bottom: 30px;
+   border: 1px solid lightgrey;
+   border-radius: 7px;
+   width: 50%;
+   
+}
+
+form {
+   margin-top: 6px;
+   margin-left: 20px;
+}
+
+textarea {
+   text-decoration: none;
+   display: inline-block;
+   font-size: 16px;
+   padding-top: 10px;
+   padding-bottom: 30px;
+   border: 1px solid lightgrey;
+   border-radius: 7px;
+   width: 50%;
+   height: 100px;
+
+}
+
+.author {
+   font-size: 30px;
+}
+
+.step-links {
+   padding-left: 20px;
+}
+

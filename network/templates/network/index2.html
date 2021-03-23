@@ -1,0 +1,81 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<div id="app"></div>
+
+
+<script type="text/babel">
+
+class Post extends React.Component {
+    render() {
+        return(
+            <div>
+                <div>{this.state.text}</div>
+                <button>Edit</button>
+                <button>Like</button>
+                <div>{this.state.likeCount}</div>
+            </div>
+        )
+    }
+   
+}
+
+class App extends React.Component {
+    
+    constructor(props) {
+        super(props);
+        this.state = {
+            response: ""
+            
+        };
+    }
+    render() {
+        return (
+        <div>
+            <input type="text" onChange={this.updateResponse} value={this.state.response} />
+            <button onClick={this.Post}>Post</button>
+            
+    
+        </div> 
+        );
+    }
+
+   Post = (event) => {
+            const text = this.state.response;
+            fetch('post', {
+            method: 'POST',
+            body: JSON.stringify({
+                text: text
+            })
+        })    
+        .then(response => response.json())
+        .then(result => {
+    });
+    this.setState(state => ({
+        response: ""
+    }));
+        
+        }
+    
+
+    updateResponse = (event) => {
+        this.setState({
+            response: event.target.value
+        });
+        
+    }
+    // update state 
+  
+}
+
+ReactDOM.render(<App />, document.querySelector('#app'));
+
+</script>
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'network/index.js' %}"></script>
+{% endblock %}
